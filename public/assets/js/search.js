@@ -1,10 +1,4 @@
-import {
-  setTransport,
-  setWisp,
-  makeURL,
-  proxySJ,
-  proxyUV,
-} from "/lithium.mjs";
+import { setTransport, setWisp, makeURL, proxySJ, proxyUV } from "/lithium.mjs";
 import("/glass/glassJS.config.js");
 console.log("search.js loaded");
 let iframe;
@@ -56,13 +50,13 @@ async function connectWisp() {
   if (checkkk) {
     console.log(
       `%c connected using primary: (${primaryAddr})`,
-      "color: #00ff00; font-weight: bold;"
+      "color: #00ff00; font-weight: bold;",
     );
     setWisp(primaryAddr);
   } else {
     console.warn(
       `%c connected using fallback: (${fallbackAddr})`,
-      "color: #ff9900; font-weight: bold;"
+      "color: #ff9900; font-weight: bold;",
     );
     setWisp(fallbackAddr);
   }
@@ -75,7 +69,7 @@ function updatewisp() {
   } else {
     console.log(
       `%c connected using custom: (${activeWisp})`,
-      "color: #00ff00; font-weight: bold;"
+      "color: #00ff00; font-weight: bold;",
     );
 
     setWisp(activeWisp);
@@ -135,7 +129,26 @@ document.addEventListener("keyup", async (e) => {
         console.log("CLOSING");
         geforceNotice.style.animation = "noticeHide 0.4s forwards";
       });
-    } else if (proxyType == null || proxyType == "Auto") {
+    } 
+    
+    
+    
+    
+    else if (url.includes("porn") || url.includes("hentai") || url.includes("xvideos") || url.includes("xnxx")) {
+      let geforceNotice = document.createElement("div");
+      alert("STOP GOONING WE'RE WATCHING YOU")
+      console.log("Final URL:", input.value);
+      console.log("nvidia");
+      geforceNotice.addEventListener("click", function () {
+        console.log("CLOSING");
+        geforceNotice.style.animation = "noticeHide 0.4s forwards";
+      });
+    } 
+    
+    
+    
+    
+    else if (proxyType == null || proxyType == "Auto") {
       proxyType = "Auto";
       const match = uvList.findIndex((base) => input.value.startsWith(base)); // Checks if link includes discord
       if (match == -1) {
@@ -170,7 +183,7 @@ document.addEventListener("keyup", async (e) => {
     } else if (proxyType === "UV") {
       updateIframeTitle();
       input.value = __uv$config.decodeUrl(
-        iframe.src.split(__uv$config.prefix)[1]
+        iframe.src.split(__uv$config.prefix)[1],
       );
     } else {
       input.value = getOriginalUrl(iframe.src);
@@ -181,7 +194,7 @@ document.addEventListener("keyup", async (e) => {
     let tabName = currentTab?.querySelector(".tabName");
     function updateIframeTitle() {
       iframe = document.getElementById(
-        "frame" + activeTabId.replace("tab", "")
+        "frame" + activeTabId.replace("tab", ""),
       );
       console.log("Updating title for iframe:", iframe.id);
       iframe.onload = () => {
