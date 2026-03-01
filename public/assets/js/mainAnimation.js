@@ -765,7 +765,7 @@ function deleteApp(id) {
   savedApps = savedApps.filter((app) => app.id !== id);
   localStorage.setItem("customApps", JSON.stringify(savedApps));
 }
-const latestVersion = "6.5";
+const latestVersion = "6.4";
 const storedVersion = localStorage.getItem("galaxyVersion");
 function update() {
   let updateDiv = document.getElementById("update");
@@ -787,3 +787,4 @@ function checkVersion() {
   }
 }
 
+checkVersion()
