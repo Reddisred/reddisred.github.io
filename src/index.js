@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 4040;
 const HOST = process.env.HOST || "0.0.0.0";
 const env = process.env.env || "production";
 const dscWebhook = process.env.webhookthing;
-const blockedIpsPath = path.join(__dirname, "..", "blocked.json");
+const blockedIpsPath = "";
 let blockedIps = [];
 let gooners = [
   "192.189.117.22",
