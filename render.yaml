@@ -2,10 +2,11 @@ services:
   - type: web
     name: reddisred
     runtime: node
-    nodeVersion: "22.18.0"
     buildCommand: npm install
     startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
+      - key: NODE_VERSION
+        value: 22.18.0
     healthCheckPath: /health
