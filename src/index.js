@@ -90,6 +90,22 @@ fastify.register(fastifyStatic, {
   decorateReply: false,
 });
 
+fastify.register(fastifyStatic, {
+  root: path.join(publicDir, "scram"),
+  prefix: "/scram/",
+  decorateReply: false,
+});
+
+fastify.all("/scramjet/*", (req, reply) => {
+  const encodedUrl = req.url.slice("/scramjet/".length);
+  try {
+    const decodedUrl = decodeURIComponent(encodedUrl);
+    return reply.sendFile("index.html", path.join(publicDir, "a"));
+  } catch (err) {
+    reply.status(400).send({ error: "Invalid URL encoding" });
+  }
+});
+
 fastify.setErrorHandler((error, request, reply) => {
   fastify.log.error(error);
   reply.status(500).send({ error: "Internal Server Error" });
