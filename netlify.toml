@@ -1,0 +1,24 @@
+[build]
+  publish = "public"
+  command = "npm run build 2>/dev/null || echo 'No build script'"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/scramjet/*"
+  to = "/a/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/uv/*"
+  to = "/a/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+[functions]
+  directory = "netlify/functions"

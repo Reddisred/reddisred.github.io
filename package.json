@@ -12,14 +12,16 @@
     "url": "git+https://github.com/Hydra-Network/GalaxyV6.git"
   },
   "license": "ISC",
-  "author": "rogo",
-  "type": "module",
-  "main": "index.js",
+  "engines": {
+    "node": ">=18.0.0 <20.0.0",
+    "npm": ">=8.0.0"
+  },
   "scripts": {
     "start": "node src/index.js",
     "start-server": "node --watch src/index.js",
     "start-browser": "browser-sync start --proxy localhost:4040 --files 'public/**/*, views/**/*.html, **/*.css'",
-    "dev": "npm-run-all --parallel start-server start-browser"
+    "dev": "npm-run-all --parallel start-server start-browser",
+    "test": "node test-deployment.js"
   },
   "dependencies": {
     "@fastify/rate-limit": "^10.3.0",

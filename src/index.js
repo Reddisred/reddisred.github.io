@@ -9,6 +9,7 @@ import path from "node:path";
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 import dotenv from "dotenv";
+import fs from "node:fs";
 logging.set_level(logging.INFO);
 
 dotenv.config();
@@ -74,8 +75,24 @@ fastify.register(fastifyStatic, {
   decorateReply: true,
 });
 
-fastify.get("/", (req, reply) => {
-  return reply.sendFile("index.html", publicDir);
+fastify.get("/health", async (req, reply) => {
+  const health = {
+    status: "ok",
+    timestamp: new Date().toISOString(),
+    port: PORT,
+    host: HOST,
+    env: env,
+    publicDir: publicDir,
+    publicDirExists: fs.existsSync(publicDir),
+    scramjetDir: path.join(publicDir, "scram"),
+    scramjetExists: fs.existsSync(path.join(publicDir, "scram")),
+    proxyPage: path.join(publicDir, "a", "index.html"),
+    proxyPageExists: fs.existsSync(path.join(publicDir, "a", "index.html")),
+    nodeVersion: process.version,
+    platform: process.platform
+  };
+
+  return reply.send(health);
 });
 
 fastify.register(fastifyStatic, {
@@ -131,14 +148,17 @@ fastify.listen({ port: PORT, host: HOST }, (err) => {
   }
 
   const address = fastify.server.address();
-  console.log(`Server running in ${env} mode`);
-  console.log(`Listening on:`);
-  console.log(`\thttp://localhost:${address.port}`);
-  console.log(`\thttp://${hostname()}:${address.port}`);
-  if (address.family === "IPv6") {
-    console.log(`\thttp://[${address.address}]:${address.port}`);
+  console.log(`🚀 Server running in ${env} mode`);
+  console.log(`📡 Listening on port: ${address.port}`);
+  console.log(`🌐 Public directory: ${publicDir}`);
+  console.log(`🔗 Available at: http://localhost:${address.port}`);
+  console.log(`📁 Static files served from: ${publicDir}`);
+
+  // Test if public directory exists (sync check)
+  if (fs.existsSync(publicDir)) {
+    console.log(`✅ Public directory exists`);
   } else {
-    console.log(`\thttp://${address.address}:${address.port}`);
+    console.log(`❌ Public directory NOT found: ${publicDir}`);
   }
 });
 

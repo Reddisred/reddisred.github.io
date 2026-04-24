@@ -1,0 +1,13 @@
+# Scramjet proxy routes
+/scramjet/* /a/index.html 200
+
+# UV proxy routes
+/uv/* /a/index.html 200
+
+# API routes to functions
+/api/* /.netlify/functions/api/:splat 200
+
+# Bare server routes (these won't work without functions)
+/baremux/* /.netlify/functions/bare 200
+/epoxy/* /.netlify/functions/epoxy 200
+/wisp/* /.netlify/functions/wisp 200
