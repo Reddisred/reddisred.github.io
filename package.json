@@ -12,8 +12,9 @@
     "url": "git+https://github.com/Hydra-Network/GalaxyV6.git"
   },
   "license": "ISC",
+  "type": "module",
   "engines": {
-    "node": ">=18.0.0 <20.0.0",
+    "node": ">=22.0.0 <24.0.0",
     "npm": ">=8.0.0"
   },
   "scripts": {
